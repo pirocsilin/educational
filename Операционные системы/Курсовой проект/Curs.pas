@@ -4,45 +4,45 @@ uses Crt, Dos;
 const
 	FIO : string = '<< Full Name "Course work" >>';
 	Arr : array [0..47] of integer = (659, 622, 659, 622, 659, 494,
-									  587, 523, 440, 440, 440, 262,
-									  330, 440, 494, 494, 494, 330,
-									  415, 494, 523, 523, 523, 330,
-									  659, 622, 659, 622, 659, 494,
-									  587, 523, 440, 440, 440, 262,
-									  330, 440, 494, 494, 494, 330, 
-									  523, 494, 440, 440, 440, 330);
+					587, 523, 440, 440, 440, 262,
+					330, 440, 494, 494, 494, 330,
+					415, 494, 523, 523, 523, 330,
+					659, 622, 659, 622, 659, 494,
+					587, 523, 440, 440, 440, 262,
+					330, 440, 494, 494, 494, 330, 
+					523, 494, 440, 440, 440, 330);
 	MaxSpeed = 5;
 	n = 5;
 var
-	FileName					:	String;
-	Buffer1						: 	array [1..n] of Char;
-	Buffer2						: 	array [1..n] of longint;
-	SimpleNum					:	longint;
-	OldPOP1						:	procedure;
-	OldPOP2						:	procedure;
-	CountElem1, CountElem2, dP_3:	Byte;
+	FileName			:	String;
+	Buffer1				: 	array [1..n] of Char;
+	Buffer2				: 	array [1..n] of longint;
+	SimpleNum			:	longint;
+	OldPOP1				:	procedure;
+	OldPOP2				:	procedure;
+	CountElem1, CountElem2, dP_3	:	Byte;
 	Code, Head1, Teil1, dC_3	:	Byte;
 	Timer, Stream, Head2, Teil2	:	Byte;
 	dP_1, dC_1, dP_2, dC_2, DT	:	Byte;
-	xP1, yP1, xP2, yP2, xP3, yP3:	Byte;
-	Position, p1, p2, ExitCode  :	Byte;
-	DT1, DT2					:	Integer;
-	ch							:	Char;
-	f							:	File of Char;
-	CountCh, fSize, Note, C1, C2:	Integer;
+	xP1, yP1, xP2, yP2, xP3, yP3	:	Byte;
+	Position, p1, p2, ExitCode  	:	Byte;
+	DT1, DT2			:	Integer;
+	ch				:	Char;
+	f				:	File of Char;
+	CountCh, fSize, Note, C1, C2	:	Integer;
 	TickerPos, PrevTimer		:	Byte;
 	StatusProd1, StatusCons1	:	Boolean;
 	StatusProd2, StatusCons2	:	Boolean;
 	StopProd2, StopCons2		:	Boolean;
 	AwaitProd2, AwaitCons2		:	Boolean;
 	
-procedure Consumer_1;				forward;
-procedure Produce_1;				forward;
-procedure Consumer_2;				forward;
-procedure Produce_2;				forward;
-procedure SpeedControl(Num : Byte); forward;
+procedure Consumer_1;			forward;
+procedure Produce_1;			forward;
+procedure Consumer_2;			forward;
+procedure Produce_2;			forward;
+procedure SpeedControl(Num : Byte); 	forward;
 procedure GoXY(ProcNum : Byte);		forward;
-procedure Put(x,y,col,p  : integer);forward;
+procedure Put(x,y,col,p  : integer);	forward;
 procedure Condition(x,y,n : Byte);	forward;
 procedure BufferFull(x,y  : Byte);	forward;
 
@@ -125,10 +125,10 @@ begin
 			exit; 
 		end
 		else if CountElem1 = n then
-			begin						{Если буферное пространство заполнено, то		}
+			begin				{Если буферное пространство заполнено, то	}
 				StatusCons1 := true;	{меняем статус потока потребителя на активный	}
-				Consumer_1; 			{и передаем управление. Таким образов оставшийся}
-			end							{квант времени отдаем потребителю.				}
+				Consumer_1; 		{и передаем управление. Таким образов оставшийся}
+			end				{квант времени отдаем потребителю.		}
 		else
 		begin
 			Condition(26,19,1);
@@ -225,10 +225,10 @@ begin
 		AwaitProd2 := false;
 
 		if CountElem2 = n then
-			begin						{Если буферное пространство заполнено, то		}
+			begin				{Если буферное пространство заполнено, то	}
 				StatusCons2 := true;	{меняем статус потока потребителя на активный	}
-				Consumer_2; 			{и передаем управление. Таким образов оставшийся}
-			end							{квант времени отдаем потребителю.				}
+				Consumer_2; 		{и передаем управление. Таким образов оставшийся}
+			end				{квант времени отдаем потребителю.		}
 		else
 		begin
 			Condition(68,19,1);
@@ -268,7 +268,7 @@ var
 	CheckDivisorZero : byte;
 	i:Integer;
 begin
-	if (dC_2=0) and (StopCons2=false) then 	{Если поток остановлен, обновляем статус}
+	if (dC_2=0) and (StopCons2=false) then 			{Если поток остановлен, обновляем статус}
 	begin 									
 		Condition(68,20,3); 
 		StopCons2 := true;
@@ -397,13 +397,13 @@ begin
 						end;
 	end;
 	
-	if ExitCode = 1 then							{Выход, если нажали ESC}
+	if ExitCode = 1 then						{Выход, если нажали ESC}
 	begin
 		ExitCode := 2;
 		SetIntVec($8, Addr(OldPOP1));
 	end
-	else if (dP_1=0) and (dC_1=0) and (dP_2=0) and	{Выход, если все		}
-			(dC_2=0) and (p1=0)   and (p2=0)   then {процессы приостановлены}
+	else if (dP_1=0) and (dC_1=0) and (dP_2=0) and			{Выход, если все		}
+			(dC_2=0) and (p1=0)   and (p2=0)   then 	{процессы приостановлены}
 	begin
 		ExitCode := 2;
 		SetIntVec($8, Addr(OldPOP1));				{Возврат адресов системных}
@@ -517,7 +517,7 @@ begin
 end;
 
 procedure Put;						{Интерфейс визуализации состояния}
-var									{скорости для каждого потока	 }
+var							{скорости для каждого потока	 }
 	i, nd : Byte;
 begin
 	window(1,1,80,25);
@@ -534,9 +534,9 @@ begin
 	textbackground(0);
 end;
 
-procedure EndProc;					{Считывание оставшихся элементов }
-begin								{из буферов и установка состояния}
-	StatusCons1 := true;			{останова всех процессов		 }
+procedure EndProc;				{Считывание оставшихся элементов }
+begin						{из буферов и установка состояния}
+	StatusCons1 := true;			{останова всех процессов	 }
 	Consumer_1; Condition(26,20,3);
 	
 	StatusCons2 := true;
@@ -553,13 +553,13 @@ begin								{из буферов и установка состояния}
 	gotoxy(19,24);
 end;
 
-begin								{Переменные для управления и контроля}
-	ExitCode	:= 0;				{за состоянием каждого потока		 }
-	DT			:= 10;
-	DT1			:= 3;
-	DT2			:= 3;
-	p1			:= 3;
-	p2			:= 3;
+begin							{Переменные для управления и контроля}
+	ExitCode	:= 0;				{за состоянием каждого потока		}
+	DT		:= 10;
+	DT1		:= 3;
+	DT2		:= 3;
+	p1		:= 3;
+	p2		:= 3;
 	Timer		:= 0;
 	Head1		:= 1;
 	Teil1		:= 1;
@@ -572,12 +572,12 @@ begin								{Переменные для управления и контрол
 	dP_2		:= 1;
 	dC_2		:= 2;	
 	CountCh		:= 0;
-	xP1			:= 0;
-	yP1			:= 0;
-	xP2			:= 0;
-	yP2			:= 0;
-	xP3			:= 1;
-	yP3			:= 4;
+	xP1		:= 0;
+	yP1		:= 0;
+	xP2		:= 0;
+	yP2		:= 0;
+	xP3		:= 1;
+	yP3		:= 4;
 	SimpleNum	:= 1;
 	Position	:= 1;
 	Note		:= 0;
@@ -613,8 +613,8 @@ begin								{Переменные для управления и контрол
 	
 	Ramka(4,18);
 	
-	reset(f);										{Открываем файл для чтения		   }
-	fSize := filesize(f);							{Записываем количество символов в f}
+	reset(f);						{Открываем файл для чтения	  }
+	fSize := filesize(f);					{Записываем количество символов в f}
 	
 	GetIntVec($8, @OldPOP1);
 	SetIntVec($8, Addr(NewPOP1));
@@ -634,5 +634,5 @@ begin								{Переменные для управления и контрол
 	until ExitCode = 2;						{Бесконечный цикл пока не нажата ESC}
 
 	EndProc;
-	close(f);								{Закрываем файл}
+	close(f);							{Закрываем файл}
 end.
