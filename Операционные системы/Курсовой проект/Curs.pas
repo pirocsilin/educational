@@ -69,7 +69,7 @@ begin
 				dC_2 := dC_2 mod MaxSpeed; 
 				Put(62,20,7,dC_2);
 			end;
-		20: begin 
+		20: begin  
 				DT1 := DT1 - 3;
 				if DT1 < 0 then DT1 := 9;
 				inc(p1);
