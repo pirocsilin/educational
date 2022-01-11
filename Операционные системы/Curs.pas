@@ -4,45 +4,45 @@ uses Crt, Dos;
 const
 	FIO : string = '<< Full Name "Course work" >>';
 	Arr : array [0..47] of integer = (659, 622, 659, 622, 659, 494,
-									  587, 523, 440, 440, 440, 262,
+					 				  587, 523, 440, 440, 440, 262,
 									  330, 440, 494, 494, 494, 330,
-									  415, 494, 523, 523, 523, 330,
+					 				  415, 494, 523, 523, 523, 330,
 									  659, 622, 659, 622, 659, 494,
-									  587, 523, 440, 440, 440, 262,
-									  330, 440, 494, 494, 494, 330, 
-									  523, 494, 440, 440, 440, 330);
+					 				  587, 523, 440, 440, 440, 262,
+					  				  330, 440, 494, 494, 494, 330, 
+					  				  523, 494, 440, 440, 440, 330);
 	MaxSpeed = 5;
 	n = 5;
 var
-	FileName					:	String;
-	Buffer1						: 	array [1..n] of Char;
-	Buffer2						: 	array [1..n] of longint;
-	SimpleNum					:	longint;
-	OldPOP1						:	procedure;
-	OldPOP2						:	procedure;
-	CountElem1, CountElem2, dP_3:	Byte;
+	FileName			:	String;
+	Buffer1				: 	array [1..n] of Char;
+	Buffer2				: 	array [1..n] of longint;
+	SimpleNum			:	longint;
+	OldPOP1				:	procedure;
+	OldPOP2				:	procedure;
+	CountElem1, CountElem2, dP_3	:	Byte;
 	Code, Head1, Teil1, dC_3	:	Byte;
 	Timer, Stream, Head2, Teil2	:	Byte;
 	dP_1, dC_1, dP_2, dC_2, DT	:	Byte;
-	xP1, yP1, xP2, yP2, xP3, yP3:	Byte;
-	Position, p1, p2, ExitCode  :	Byte;
-	DT1, DT2					:	Integer;
-	ch							:	Char;
-	f							:	File of Char;
-	CountCh, fSize, Note, C1, C2:	Integer;
+	xP1, yP1, xP2, yP2, xP3, yP3	:	Byte;
+	Position, p1, p2, ExitCode  	:	Byte;
+	DT1, DT2			:	Integer;
+	ch				:	Char;
+	f				:	File of Char;
+	CountCh, fSize, Note, C1, C2	:	Integer;
 	TickerPos, PrevTimer		:	Byte;
 	StatusProd1, StatusCons1	:	Boolean;
 	StatusProd2, StatusCons2	:	Boolean;
 	StopProd2, StopCons2		:	Boolean;
 	AwaitProd2, AwaitCons2		:	Boolean;
 	
-procedure Consumer_1;				forward;
-procedure Produce_1;				forward;
-procedure Consumer_2;				forward;
-procedure Produce_2;				forward;
-procedure SpeedControl(Num : Byte); forward;
+procedure Consumer_1;			forward;
+procedure Produce_1;			forward;
+procedure Consumer_2;			forward;
+procedure Produce_2;			forward;
+procedure SpeedControl(Num : Byte); 	forward;
 procedure GoXY(ProcNum : Byte);		forward;
-procedure Put(x,y,col,p  : integer);forward;
+procedure Put(x,y,col,p  : integer);	forward;
 procedure Condition(x,y,n : Byte);	forward;
 procedure BufferFull(x,y  : Byte);	forward;
 
@@ -86,7 +86,7 @@ begin
 	end;
 end;
 
-procedure GoXY;								{Переход в нужную позицию окна}
+procedure GoXY;							{Переход в нужную позицию окна}
 begin
 	case ProcNum of
 		1: begin 
@@ -125,10 +125,10 @@ begin
 			exit; 
 		end
 		else if CountElem1 = n then
-			begin						{Если буферное пространство заполнено, то		}
-				StatusCons1 := true;	{меняем статус потока потребителя на активный	}
-				Consumer_1; 			{и передаем управление. Таким образов оставшийся}
-			end							{квант времени отдаем потребителю.				}
+			begin							{Если буферное пространство заполнено, то	}
+				StatusCons1 := true;		{меняем статус потока потребителя на активный	}
+				Consumer_1; 				{и передаем управление. Таким образов оставшийся}
+			end								{квант времени отдаем потребителю.		}
 		else
 		begin
 			Condition(26,19,1);
@@ -198,14 +198,14 @@ begin
 	BufferFull(36,20);
 end;
 
-procedure Produce_2;						{Поток - производитель второго процесса}
+procedure Produce_2;							{Поток - производитель второго процесса}
 var
 	CheckDivisorZero : byte;
 	i,j  : longint;
 	k	 : Integer;
 	Label L1,L2;
 begin
-	if (dP_2=0) and (StopProd2=false) then 	{Если поток остановлен, обновляем статус}
+	if (dP_2=0) and (StopProd2=false) then 		{Если поток остановлен, обновляем статус}
 	begin 
 		Condition(68,19,3); 
 		StopProd2 := true;
@@ -225,10 +225,10 @@ begin
 		AwaitProd2 := false;
 
 		if CountElem2 = n then
-			begin						{Если буферное пространство заполнено, то		}
+			begin						{Если буферное пространство заполнено, то	}
 				StatusCons2 := true;	{меняем статус потока потребителя на активный	}
 				Consumer_2; 			{и передаем управление. Таким образов оставшийся}
-			end							{квант времени отдаем потребителю.				}
+			end							{квант времени отдаем потребителю.		}
 		else
 		begin
 			Condition(68,19,1);
@@ -263,12 +263,12 @@ begin
 	BufferFull(75,20);
 end;
 
-procedure Consumer_2;						{Поток - потребитель второго процесса}
+procedure Consumer_2;								{Поток - потребитель второго процесса}
 var
 	CheckDivisorZero : byte;
 	i:Integer;
 begin
-	if (dC_2=0) and (StopCons2=false) then 	{Если поток остановлен, обновляем статус}
+	if (dC_2=0) and (StopCons2=false) then 			{Если поток остановлен, обновляем статус}
 	begin 									
 		Condition(68,20,3); 
 		StopCons2 := true;
@@ -373,41 +373,41 @@ begin
 	
 	case Timer of
 		3,6,9,12,15,18: begin
-							Music;
-							Ticker;
-							GoXY(2);
-						end;
+					Music;
+					Ticker;
+					GoXY(2);
+				end;
 		1,4,7,10,13,16: begin
-							StatusProd2 := false;
-							StatusCons2 := false;
-							Stream := random(2);
-							if Stream = 0 then
-								StatusProd1 := true
-							else
-								StatusCons1 := true;
-						end;
+					StatusProd2 := false;
+					StatusCons2 := false;
+					Stream := random(2);
+					if Stream = 0 then
+						StatusProd1 := true
+					else
+						StatusCons1 := true;
+					end;
 		2,5,8,11,14,17: begin
-							StatusProd1 := false;
-							StatusCons1 := false;
-							Stream := random(2);
-							if Stream = 0 then
-								StatusProd2 := true
-							else
-								StatusCons2 := true;
-						end;
+					StatusProd1 := false;
+					StatusCons1 := false;
+					Stream := random(2);
+					if Stream = 0 then
+						StatusProd2 := true
+					else
+						StatusCons2 := true;
+					end;
 	end;
 	
-	if ExitCode = 1 then							{Выход, если нажали ESC}
+	if ExitCode = 1 then									{Выход, если нажали ESC}
 	begin
 		ExitCode := 2;
 		SetIntVec($8, Addr(OldPOP1));
 	end
-	else if (dP_1=0) and (dC_1=0) and (dP_2=0) and	{Выход, если все		}
-			(dC_2=0) and (p1=0)   and (p2=0)   then {процессы приостановлены}
+	else if (dP_1=0) and (dC_1=0) and (dP_2=0) and			{Выход, если все	}
+			(dC_2=0) and (p1=0)   and (p2=0)   then 		{процессы приостановлены}
 	begin
 		ExitCode := 2;
-		SetIntVec($8, Addr(OldPOP1));				{Возврат адресов системных}
-		SetIntVec($9, Addr(OldPOP2));				{прерываний в таблицу	  }
+		SetIntVec($8, Addr(OldPOP1));					{Возврат адресов системных}
+		SetIntVec($9, Addr(OldPOP2));					{прерываний в таблицу	  }
 		inline($9C);
 		OldPOP2;
 		if keypressed then ch := readkey;
@@ -536,7 +536,7 @@ end;
 
 procedure EndProc;					{Считывание оставшихся элементов }
 begin								{из буферов и установка состояния}
-	StatusCons1 := true;			{останова всех процессов		 }
+	StatusCons1 := true;			{останова всех процессов	 }
 	Consumer_1; Condition(26,20,3);
 	
 	StatusCons2 := true;
@@ -553,8 +553,8 @@ begin								{из буферов и установка состояния}
 	gotoxy(19,24);
 end;
 
-begin								{Переменные для управления и контроля}
-	ExitCode	:= 0;				{за состоянием каждого потока		 }
+begin							{Переменные для управления и контроля	}
+	ExitCode	:= 0;				{за состоянием каждого потока		}
 	DT			:= 10;
 	DT1			:= 3;
 	DT2			:= 3;
@@ -613,8 +613,8 @@ begin								{Переменные для управления и контрол
 	
 	Ramka(4,18);
 	
-	reset(f);										{Открываем файл для чтения		   }
-	fSize := filesize(f);							{Записываем количество символов в f}
+	reset(f);								{Открываем файл для чтения		}
+	fSize := filesize(f);					{Записываем количество символов в f	}
 	
 	GetIntVec($8, @OldPOP1);
 	SetIntVec($8, Addr(NewPOP1));
@@ -631,8 +631,8 @@ begin								{Переменные для управления и контрол
 			Produce_2
 		else if StatusCons2 = true then 
 			Consumer_2;
-	until ExitCode = 2;						{Бесконечный цикл пока не нажата ESC}
+	until ExitCode = 2;					{Бесконечный цикл пока не нажата ESC}
 
 	EndProc;
-	close(f);								{Закрываем файл}
+	close(f);							{Закрываем файл}
 end.
