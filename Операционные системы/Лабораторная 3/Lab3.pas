@@ -7,23 +7,23 @@ const
 	Impuls = 18.2;
 	n = 10;
 var
-	OldPOP						:	procedure;
-	Buffer						: 	array [1..n] of Byte;
-	StreamsArr					:	PtrDataArr;
-	PriorityActive, ManyStreams :	boolean;
-	Kvant, CountElem, Tail, Head:	Byte;
-	Cod1, Cod2, DelayMS			:	integer;
+	OldPOP				:	procedure;
+	Buffer				: 	array [1..n] of Byte;
+	StreamsArr			:	PtrDataArr;
+	PriorityActive, ManyStreams 	:	boolean;
+	Kvant, CountElem, Tail, Head	:	Byte;
+	Cod1, Cod2, DelayMS		:	integer;
 	x,y,i, CountP, CountC		:	integer;
-	PriorityMode, Timer, EndTime:	integer;
-	CallProc, Streams 			:	integer;
-	StartTime					:	Real;
-	ExitCode					:	Byte;
+	PriorityMode, Timer, EndTime	:	integer;
+	CallProc, Streams 		:	integer;
+	StartTime			:	Real;
+	ExitCode			:	Byte;
 	StatusProd, StatusCons		:	boolean;
 
-procedure Produce;  				forward;
-procedure Consumer; 				forward;
-procedure Put(x,y,i,col  : integer);forward;
-procedure BufferFull; 				forward;
+procedure Produce;  			forward;
+procedure Consumer; 			forward;
+procedure Put(x,y,i,col  : integer);	forward;
+procedure BufferFull; 			forward;
 
 procedure Produce;			{Поток-производитель}
 begin
@@ -31,16 +31,16 @@ begin
 	begin
 		if (CountElem = n) and (Streams>2) then
 			begin
-				StatusCons := true;	{Если буфер полный и имеем очередь потоков,	  }
-				StatusProd := false;{то активируем поток-потребитель и завершаем  }
-				exit;				{работу производителя. Тогда в очереди будет  }
-			end						{найден ближайший потребитель который получит }
-									{оставшийся квант времени.					  }
+				StatusCons := true;	{Если буфер полный и имеем очередь потоков,	}
+				StatusProd := false;	{то активируем поток-потребитель и завершаем    }
+				exit;			{работу производителя. Тогда в очереди будет    }
+			end				{найден ближайший потребитель который получит   }
+							{оставшийся квант времени.			}
 		else if CountElem = n then
-			begin					{Если буферное пространство заполнено, то		}
+			begin				{Если буферное пространство заполнено, то	}
 				StatusCons := true;	{меняем статус потока потребителя на активный	}
-				Consumer; 			{и передаем управление. Таким образов оставшийся}
-			end						{квант времени отдаем потребителю.				}
+				Consumer; 		{и передаем управление. Таким образов оставшийся}
+			end				{квант времени отдаем потребителю.		}
 		
 		else begin
 			inc(CountElem);
@@ -64,19 +64,19 @@ begin
 	begin
 		if (CountElem = 0) and (Streams>2) then 
 			begin
-				StatusProd := true;	{Если буфер пуст и имеем очередь потоков,	  	}
-				StatusCons := false;{то активируем поток-производитель и завершаем  }
-				exit;				{работу потребителя. Тогда в очереди будет  	}
-			end						{найден ближайший производитель который получит	}
-									{оставшийся квант времени.					  	}
+				StatusProd := true;	{Если буфер пуст и имеем очередь потоков,	}
+				StatusCons := false;	{то активируем поток-производитель и завершаем  }
+				exit;			{работу потребителя. Тогда в очереди будет  	}
+			end				{найден ближайший производитель который получит	}
+							{оставшийся квант времени.			}
 		
 		else if (ExitCode<>0) and (CountElem = 0) then exit
 
 		else if CountElem = 0 then
-			begin					{Если буферное пространство пустое, то			}
+			begin				{Если буферное пространство пустое, то		}
 				StatusProd := true;	{меняем статус потока производителя на активный	}
-				Produce; 			{и передаем управление. Таким образов оставшийся}
-			end						{квант времени отдаем производителю.			}
+				Produce; 		{и передаем управление. Таким образов оставшийся}
+			end				{квант времени отдаем производителю.		}
 
 		else begin
 			dec(CountElem);
@@ -129,7 +129,7 @@ begin
 	gotoxy(33, y+7);
 end;
 
-procedure Put;				  {Процедура вывода содержания буфера}
+procedure Put;			{Процедура вывода содержания буфера}
 begin
 	textbackground(col);
 	gotoxy(x+i*3,y);
@@ -147,20 +147,20 @@ var
 	NumP, NumC : Integer;
 begin
 	BufferFull;
-	Index := 0;				  {Индекс текущего потока в списке  }
-	NumP  := 0;				  {Количество потоков-производителей}
-	NumC  := 0;				  {Количество поток-потребитель		}
-	Count := CountP + CountC; {Общее количество потоков			}
+	Index := 0;			{Индекс текущего потока в списке  }
+	NumP  := 0;			{Количество потоков-производителей}
+	NumC  := 0;			{Количество поток-потребитель	}
+	Count := CountP + CountC; 	{Общее количество потоков	}
 	
 	textcolor(10);
 	gotoxy(x, y-5);
 	write('Produce ',CountP,' | Consumer ',CountC);
 	textcolor(15);
 	
-	if (CountP=0) or (CountC=0) then {Проверка числа потребителей и 			}
-	begin							 {производителей. Если все потребители		}
-		textcolor(14);				 {или производители, то завершаем программу }
-		gotoxy(x-9, y+7);			 {с выводом сообщения об ошибке.			}
+	if (CountP=0) or (CountC=0) then 		{Проверка числа потребителей и 		}
+	begin						{производителей. Если все потребители	}
+		textcolor(14);				{или производители, то завершаем программу }
+		gotoxy(x-9, y+7);			{с выводом сообщения об ошибке.	}
 		write('[ERROR]: Produce=0 OR Consumer=0');
 		halt;
 	end;
@@ -168,17 +168,17 @@ begin
 	repeat
 		if (StreamsArr^[Index]=0) and (StatusProd=true) then
 			begin
-				gotoxy(x-5,y+3);								{Если очередной поток - производитель		 }
-				write('    ');									{и если позволяет статус активности, 		 }
-				gotoxy(x-5,y+3);								{то вызываем его на выполнение.		 		 }
-				write('[',NumP + 1,']');						{Если очередь подошла к производителю, 		 }
-				inc(NumP);										{а его статус - не активен, т.е. активен	 }
-				NumP := NumP mod CountP;						{потребитль, то переходим к следующему потоку}
-				Produce;										{пока не найдем очередного потребителя.		 }
+				gotoxy(x-5,y+3);				{Если очередной поток - производитель	}
+				write('    ');					{и если позволяет статус активности, 	}
+				gotoxy(x-5,y+3);				{то вызываем его на выполнение.		}
+				write('[',NumP + 1,']');			{Если очередь подошла к производителю, 	}
+				inc(NumP);					{а его статус - не активен, т.е. активен}
+				NumP := NumP mod CountP;			{потребитль, то переходим к следующему потоку}
+				Produce;					{пока не найдем очередного потребителя.	}
 			end
 		else if (StreamsArr^[Index]=1) and (StatusCons=true) then
 			begin
-				gotoxy(x-5,y+4);								{Аналогично потоку производителю	}
+				gotoxy(x-5,y+4);				{Аналогично потоку производителю	}
 				write('    ');
 				gotoxy(x-5,y+4);
 				write('[',NumC + 1,']');
@@ -221,11 +221,11 @@ begin
 		ch := readkey;
 		if ord(ch) = 27 then 
 			begin
-				ExitCode := 1;					{Если нажали клавишу ESC то  	}
+				ExitCode := 1;				{Если нажали клавишу ESC то  	}
 				StatusProd := false;			{останавливаем потоки, меняя	}
 				StatusCons := false;			{их статус на не активные и 	}
-				SetIntVec($8, Addr(OldPOP));	{возвращаем старую процедуру 	}
-			end;								{обработки прерывания таймера	}
+				SetIntVec($8, Addr(OldPOP));		{возвращаем старую процедуру 	}
+			end;						{обработки прерывания таймера	}
 	end;									
 	
 	inline($9C);
@@ -233,14 +233,14 @@ begin
 end;
 {$F-}
 
-procedure PriorityCall;							{Проверка состояния буфера			}
+procedure PriorityCall;					{Проверка состояния буфера	}
 begin
 	if CountElem / n * 100 >= 90 then begin		{Если заполненность буфера от 90%,  }
-		PriorityActive := true;	 				{то вызываем поток-потребитель.	    }
+		PriorityActive := true;	 		{то вызываем поток-потребитель.	    }
 		StatusCons := true;
 		Consumer; end
-	else if CountElem / n * 100 <= 10 then begin{Если буфер заполнен на 10% и менее,}
-		PriorityActive := true;					{то вызываем поток-производитель.	} 
+	else if CountElem / n * 100 <= 10 then begin	{Если буфер заполнен на 10% и менее,}
+		PriorityActive := true;			{то вызываем поток-производитель.} 
 		StatusProd := true;
 		Produce; end;
 	PriorityActive:= false;
@@ -254,22 +254,22 @@ begin
 	CountElem := 0;			{Количество элементов в буфере	   }
 	Tail 	  := 1;			{Указатель на "Хвост" буфера	   }
 	Head 	  := 1;			{Указатель на "Голову" буфера	   }
-	ExitCode  := 0;			{Состояние нажатия клавиши		   }
+	ExitCode  := 0;			{Состояние нажатия клавиши	   }
 	y:=13;   x:= 25;		{Базовые координаты - Начало буфера}
 	PriorityActive := false;
 
 	val(ParamStr(1), DelayMS, Cod1);		{Получаем пераметр 1}
 	val(ParamStr(2), Streams, Cod2);		{Получаем пераметр 2}	
 	
-	if ParamStr(2) = 'on' then				{Проверка приоритетного режима}
+	if ParamStr(2) = 'on' then			{Проверка приоритетного режима}
 		PriorityMode := 1
 	else 
 		PriorityMode := 0;
 		
 	randomize;	
 	if (Cod2=0) and (Streams>2) then		{Проверка многопоточного режима,}
-		begin								{если активен то создаем список }
-			ManyStreams := true;			{потоков с количеством Streams.	}
+		begin					{если активен то создаем список }
+			ManyStreams := true;		{потоков с количеством Streams.	}
 			for i:=0 to Streams-1 do begin 
 			CallProc := random(2);
 			StreamsArr^[i] := CallProc;
@@ -301,12 +301,12 @@ begin
 	SetIntVec($8, Addr(NewPOP));
 	
 	if ManyStreams then 								{Если режим многопоточности активен, то	}
-		CallStreams										{управление вызовами потоков передаем в	}
+		CallStreams								{управление вызовами потоков передаем в	}
 	else 
-		begin											{функцию CallStreams. Иначе работаем в 	}
-			repeat										{режиме двух потоков.					}
-				if PriorityMode = 1 then PriorityCall; 	{Если активен приоритетный режим		}
-														{то проверяем состояние буфера. 		}
+		begin									{функцию CallStreams. Иначе работаем в 	}
+			repeat								{режиме двух потоков.			}
+				if PriorityMode = 1 then PriorityCall; 			{Если активен приоритетный режим	}
+											{то проверяем состояние буфера. 	}
 				if StatusProd = true then
 					Produce								
 				else if StatusCons = true then 
