@@ -300,22 +300,22 @@ begin
 	GetIntVec($8, @OldPOP);
 	SetIntVec($8, Addr(NewPOP));
 	
-	if ManyStreams then 								{Если режим многопоточности активен, то	}
-		CallStreams								{управление вызовами потоков передаем в	}
+	if ManyStreams then 							{Если режим многопоточности активен, то	}
+		CallStreams							{управление вызовами потоков передаем в	}
 	else 
-		begin									{функцию CallStreams. Иначе работаем в 	}
-			repeat								{режиме двух потоков.			}
-				if PriorityMode = 1 then PriorityCall; 			{Если активен приоритетный режим	}
-											{то проверяем состояние буфера. 	}
+		begin								{функцию CallStreams. Иначе работаем в 	}
+			repeat							{режиме двух потоков.			}
+				if PriorityMode = 1 then PriorityCall; 		{Если активен приоритетный режим	}
+										{то проверяем состояние буфера. 	}
 				if StatusProd = true then
 					Produce								
 				else if StatusCons = true then 
 					Consumer;
 						
-			until ExitCode = 1;						{Бесконечный цикл пока не нажали ESC}
+			until ExitCode = 1;					{Бесконечный цикл пока не нажали ESC}
 		end;
 		
-	StatusCons := true;								{Дочитываем информацию из буфера	}
+	StatusCons := true;							{Дочитываем информацию из буфера	}
 	Consumer;
 	gotoxy(x+10,y+4);
 	textcolor(12);
