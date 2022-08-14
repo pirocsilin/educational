@@ -12,7 +12,7 @@ unsigned int K[8]{};					// ключ шифрования
 unsigned int Y[2]{};					// блок шифрограммы или сообщения
 unsigned int W[32]{};					// раундовый ключ
 unsigned int S[8][16]{};				// S - боксы
-unsigned int Y0[2]{ 0xACDC, 0xCDCA };	// начальный вектор
+unsigned int Y0[2]{ 0xACDC, 0xCDCA };			// начальный вектор
 
 void Shifr(unsigned char X[]) {
 
