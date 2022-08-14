@@ -315,7 +315,7 @@ begin
 			until ExitCode = 1;					{Бесконечный цикл пока не нажали ESC}
 		end;
 		
-	StatusCons := true;							{Дочитываем информацию из буфера	}
+	StatusCons := true;							{Дочитываем информацию из буфера	} 
 	Consumer;
 	gotoxy(x+10,y+4);
 	textcolor(12);
