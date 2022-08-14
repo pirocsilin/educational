@@ -8,11 +8,11 @@
 
 using namespace std;
 
-unsigned int K[8]{};							// ключ шифрования
-unsigned int Y[2]{};							// блок шифрограммы или сообщения
-unsigned int W[32]{};							// раундовый ключ
-unsigned int S[8][16]{};						// S - боксы
-unsigned int Y0[2]{ 0xACDC, 0xCDCA };			// начальный вектор
+unsigned int K[8]{};					// ключ шифрования
+unsigned int Y[2]{};					// блок шифрограммы или сообщения
+unsigned int W[32]{};					// раундовый ключ
+unsigned int S[8][16]{};				// S - боксы
+unsigned int Y0[2]{ 0xACDC, 0xCDCA };	// начальный вектор
 
 void Shifr(unsigned char X[]) {
 
@@ -182,15 +182,15 @@ unsigned int main() {
 
 				Shifr(X);
 
-				if (Choice == '2') {										// режим CBC
+				if (Choice == '2') {							// режим CBC
 					*(long long*)Y ^= *(long long*)Y0;
 					*(long long*)Y0 = temp;
 				}
-				if (Choice == '3') {										// режим OFB
+				if (Choice == '3') {							// режим OFB
 					*(long long*)Y0 = *(long long*)Y;
 					*(long long*)Y ^= temp;
 				}
-				if (Choice == '4') {										// режим CTR
+				if (Choice == '4') {							// режим CTR
 					*(long long*)Y0 += 1;
 					*(long long*)Y ^= temp;
 				}
