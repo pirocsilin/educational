@@ -60,7 +60,7 @@ string GetFileName(char Choice) {
 	return	Choice == '1' ? "EncryptMessageECB.txt" :
 			Choice == '2' ? "EncryptMessageCBC.txt" :
 			Choice == '3' ? "EncryptMessageOFB.txt" :
-							"EncryptMessageCTR.txt" ;
+			"EncryptMessageCTR.txt" ;
 }
 
 unsigned int main() {
