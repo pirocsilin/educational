@@ -4,6 +4,5 @@
 3. Сравните результаты, полученные в п.1 и 2 и сделайте выводы.
 <br><br>
 ![666](https://github.com/pirocsilin/educational/assets/97364957/b3c934ce-a594-4468-b6f1-612b04a6a226)
-<br>
 <br><br>РЕЗУЛЬТАТ ВЫПОЛНЕНИЯ РАБОТЫ:<br><br>
 ![666](https://github.com/pirocsilin/educational/assets/97364957/47709ca1-0b08-42b4-a2dc-6c0c6e7a41e7)
