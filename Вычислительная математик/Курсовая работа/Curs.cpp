@@ -29,7 +29,7 @@ int main()
 	setlocale(LC_ALL, "Rus");
 	system("mode con cols=55 lines=66");
 
-	cout << "\n\t\t>> КУРСОВАЯ РАБОТА <<\n";
+	cout << "\n\t\t>> РљРЈР РЎРћР’РђРЇ Р РђР‘РћРўРђ <<\n";
 
 	StartCalculate();
 
@@ -38,9 +38,9 @@ int main()
 	double Rezult = CalculateIntegral();
 
 	cout << "\n\t-----------------------------------";
-	cout << "\n\t4) Количество теплоты:\n\n\tQ = " << Rezult << "\n";
+	cout << "\n\t4) РљРѕР»РёС‡РµСЃС‚РІРѕ С‚РµРїР»РѕС‚С‹:\n\n\tQ = " << Rezult << "\n";
 
-	cout << "\n\tЗАВЕРШИТЬ - Любая Клавиша ";
+	cout << "\n\tР—РђР’Р•Р РЁРРўР¬ - Р›СЋР±Р°СЏ РєР»Р°РІРёС€Р° ";
 	cin.get();
 
 	return 0;
@@ -130,7 +130,7 @@ void StartCalculate()
 	} while (GoalPrecision != true);
 
 	cout << "\n\t-----------------------------------";
-	cout << "\n\t2) Решение уравнения, h = " << h << ":\n\n";
+	cout << "\n\t2) Р РµС€РµРЅРёРµ СѓСЂР°РІРЅРµРЅРёСЏ, h = " << h << ":\n\n";
 	cout << "\tX:" << "\t\tY:" << "\n";
 
 	auto it = ptr2.begin(), nd = ptr2.end();
@@ -153,7 +153,7 @@ double FindRoot()
 
 		if (Root - ptr.X < target)
 		{
-			cout << "\n\t1) Наименьший положительный корень:\n\n\tИтераций - "
+			cout << "\n\t1) РќР°РёРјРµРЅСЊС€РёР№ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Р№ РєРѕСЂРµРЅСЊ:\n\n\tРС‚РµСЂР°С†РёР№ - "
 				<< i << "\n\tRoot = " << SetPrec(Root, dx1) << endl;
 
 			return SetPrec(Root, dx1);
@@ -191,7 +191,7 @@ void CalculateApproximation(double X)
 		X += ApproxStep;
 	}
 	cout << "\n\t-----------------------------------";
-	cout << "\n\t3) Результат интерполяции, h = " << ApproxStep << ":\n\n";
+	cout << "\n\t3) Р РµР·СѓР»СЊС‚Р°С‚ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё, h = " << ApproxStep << ":\n\n";
 	cout << "\tX:" << "\t\tY:" << "\n";
 
 	auto it = Approx.begin(), nd = Approx.end();
