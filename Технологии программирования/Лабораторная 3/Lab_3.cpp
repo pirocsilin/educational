@@ -24,7 +24,7 @@ int main() {
 	SetConsoleOutputCP(1251);
 	system("mode con cols=95 lines=25");
 
-	cout << "\n Ìàññèâ ñëó÷àéíûõ ÷èñåë (b=16, c=5): ";
+	cout << "\n ÐœÐ°ÑÑÐ¸Ð² ÑÐ»ÑƒÑ‡Ð°Ð¹Ð½Ñ‹Ñ… Ñ‡Ð¸ÑÐµÐ» (b=16, c=5): ";
 
 	srand(time(0));
 	for (int i = 0; i < 5; i++) {
@@ -34,24 +34,24 @@ int main() {
 		if (i == 2) N = v[i];
 		cout << v[i].GetNumStr() << "  ";
 	}
-	cout << "\n\n ×èñëà â äåñÿòè÷íîì ïðåäñòàâëåíèè:   ";
+	cout << "\n\n Ð§Ð¸ÑÐ»Ð° Ð² Ð´ÐµÑÑÑ‚Ð¸Ñ‡Ð½Ð¾Ð¼ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸Ð¸:   ";
 	for_each(v.begin(), v.end(), [](TPNumber& n) {cout << n.GetNum() << "  "; });
 
-	cout << "\n\n Âûáðàëè èç ìàññèâà ÷èñëî äëÿ îïðåöèé: " << N.GetNumStr();
+	cout << "\n\n Ð’Ñ‹Ð±Ñ€Ð°Ð»Ð¸ Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° Ñ‡Ð¸ÑÐ»Ð¾ Ð´Ð»Ñ Ð¾Ð¿Ñ€ÐµÑ†Ð¸Ð¹: " << N.GetNumStr();
 
-	cout << "\n\n Íåêîòîðûå îïåðàöèè íàä ìàññèâîì è ÷èñëîì: " << endl << endl;
+	cout << "\n\n ÐÐµÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ð½Ð°Ð´ Ð¼Ð°ÑÑÐ¸Ð²Ð¾Ð¼ Ð¸ Ñ‡Ð¸ÑÐ»Ð¾Ð¼: " << endl << endl;
 
 	try {
-		cout << "\tÑëîæåíèå:  "; 
+		cout << "\tÐ¡Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ:  "; 
 		for_each(v.begin(), v.end(), SummObjs);
 
-		cout << "\n\n\tÂû÷èòàíèå: "; 
+		cout << "\n\n\tÐ’Ñ‹Ñ‡Ð¸Ñ‚Ð°Ð½Ð¸Ðµ: "; 
 		for_each(v.begin(), v.end(), DiffObjs);
 
-		cout << "\n\n\tÓìíîæåíèå: ";
+		cout << "\n\n\tÐ£Ð¼Ð½Ð¾Ð¶ÐµÐ½Ð¸Ðµ: ";
 		for_each(v.begin(), v.end(), MulObjs());
 
-		cout << "\n\n\tÄåëåíèå:   ";
+		cout << "\n\n\tÐ”ÐµÐ»ÐµÐ½Ð¸Ðµ:   ";
 		for_each(v.begin(), v.end(), [](TPNumber& n) {cout << (n / N).GetNumStr() << "  "; });
 	}
 	catch(TPNumber::TPNumErr err){
