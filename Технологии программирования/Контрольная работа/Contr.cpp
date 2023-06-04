@@ -32,7 +32,7 @@ public:
 
 	TFract(int a, int b) {
 
-		if (b == 0) throw ErrFract("Ошибка инициализации");
+		if (b == 0) throw ErrFract("РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё");
 
 		if ((a <= 0 && b < 0) || (a > 0 && b < 0))
 		{
@@ -107,7 +107,7 @@ public:
 	TFract operator / (const TFract& op2) const {
 
 		if (denom == 0 || op2.num == 0)
-			throw ErrFract("Делитель равен нулю");
+			throw ErrFract("Р”РµР»РёС‚РµР»СЊ СЂР°РІРµРЅ РЅСѓР»СЋ");
 
 		int sign = op2.num < 0 ? -1 : 1;
 
@@ -130,7 +130,7 @@ public:
 };
 
 TFract InputUserFract() {
-	const char* err = "Ошибка ввода данных";
+	const char* err = "РћС€РёР±РєР° РІРІРѕРґР° РґР°РЅРЅС‹С…";
 	TFract UserFract;
 	bool wrong = true;
 	string rez;
@@ -152,11 +152,11 @@ TFract InputUserFract() {
 		}
 		catch (TFract::ErrFract e) {
 			cout << " ERROR: [" << e.msg << "]" << endl;
-			cout << "\tПовторный ввод: ";
+			cout << "\tРџРѕРІС‚РѕСЂРЅС‹Р№ РІРІРѕРґ: ";
 		}
 		catch (const char*) {
 			cout << " ERROR: [" << err << "]" << endl;
-			cout << "\tПовторный ввод: ";
+			cout << "\tРџРѕРІС‚РѕСЂРЅС‹Р№ РІРІРѕРґ: ";
 		}
 	} while (wrong);
 
@@ -176,31 +176,31 @@ class InOutDo
 public:
 	static void Input()
 	{
-		cout << "\n Введи простую дробь (пример 2/3) и нажмите Enter:\n" << endl;
+		cout << "\n Р’РІРµРґРё РїСЂРѕСЃС‚СѓСЋ РґСЂРѕР±СЊ (РїСЂРёРјРµСЂ 2/3) Рё РЅР°Р¶РјРёС‚Рµ Enter:\n" << endl;
 
 		for (int i = 0; i < 5; i++) {
-			cout << "\t" << i + 1 << "-я дробь: ";
+			cout << "\t" << i + 1 << "-СЏ РґСЂРѕР±СЊ: ";
 			d[i] = InputUserFract();
 		}
 	}
 	static void Output()
 	{
-		cout << "\n " << setw(23) << "Введено пять дробей:"; PrintDeque();
+		cout << "\n " << setw(23) << "Р’РІРµРґРµРЅРѕ РїСЏС‚СЊ РґСЂРѕР±РµР№:"; PrintDeque();
 	}
 	static void Sum()
 	{
 		TFract summ = accumulate(d.begin(), d.end(), TFract(), plus<TFract>());
-		cout << "\n\n " << setw(23) << "Сумма всех дробей:" << "\t" << summ.Display() << endl;
+		cout << "\n\n " << setw(23) << "РЎСѓРјРјР° РІСЃРµС… РґСЂРѕР±РµР№:" << "\t" << summ.Display() << endl;
 	}
 	static void SortUp()
 	{
 		sort(d.begin(), d.end(), less<TFract>());
-		cout << "\n " << setw(23) << "Сорт. по возрастанию:"; PrintDeque();
+		cout << "\n " << setw(23) << "РЎРѕСЂС‚. РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ:"; PrintDeque();
 	}
 	static void SortDown()
 	{
 		sort(d.begin(), d.end(), greater<TFract>());
-		cout << "\n " << setw(23) << "Сорт. по убыванию:"; PrintDeque();
+		cout << "\n " << setw(23) << "РЎРѕСЂС‚. РїРѕ СѓР±С‹РІР°РЅРёСЋ:"; PrintDeque();
 	}
 };
 
