@@ -6,7 +6,7 @@ TComplex UserInputComplex() {
 	do {
 		try {
 			string UInput;
-			cout << "\n\n Ââåäèòå êîìïëåêñíîå ÷èñëî (ïðèìåð: -4+12i): ";
+			cout << "\n\n Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð¼Ð¿Ð»ÐµÐºÑÐ½Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾ (Ð¿Ñ€Ð¸Ð¼ÐµÑ€: -4+12i): ";
 			getline(cin, UInput);
 			UComplex = TComplex(UInput);
 			Correct = true;
@@ -15,7 +15,7 @@ TComplex UserInputComplex() {
 			cout << "\n ERROR: [" << e.msg << "]";
 		}
 		catch (...) {
-			cout << "\n ERROR: [Íåèçâåñòíàÿ îøèáêà]" << endl;
+			cout << "\n ERROR: [ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°]" << endl;
 		}
 	} while (!Correct);
 
@@ -42,7 +42,7 @@ int main() {
 	SetConsoleOutputCP(1251);
 	system("mode con cols=120 lines=30");
 	
-	cout << "\n Ìàññèâ ñëó÷àéíûõ ÷èñåë: ";
+	cout << "\n ÐœÐ°ÑÑÐ¸Ð² ÑÐ»ÑƒÑ‡Ð°Ð¹Ð½Ñ‹Ñ… Ñ‡Ð¸ÑÐµÐ»: ";
 
 	srand(time(0));
 	for (int i = 0; i < 5; i++) {
@@ -53,30 +53,30 @@ int main() {
 	}
 
 	TComplex UC = UserInputComplex();
-	cout << " Ââåäåíî ÷èñëî: " << UC.GetComStr() << endl;
+	cout << " Ð’Ð²ÐµÐ´ÐµÐ½Ð¾ Ñ‡Ð¸ÑÐ»Ð¾: " << UC.GetComStr() << endl;
 
-	cout << "\n Íåêîòîðûå îïåðàöèè ñ ÷èñëîì è ìàññèâîì:" << endl;
+	cout << "\n ÐÐµÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ñ Ñ‡Ð¸ÑÐ»Ð¾Ð¼ Ð¸ Ð¼Ð°ÑÑÐ¸Ð²Ð¾Ð¼:" << endl;
 
 	try {
-		PrinBin("\tÑóììà:    ", [&UC](TComplex& c) {cout << '\t' << (c + UC).GetComStr(); }, UC);
-		PrinBin("\n\tÐàçíîñòü: ", [&UC](TComplex& c) {cout << '\t' << (c - UC).GetComStr(); }, UC);
-		PrinBin("\n\tÓìíîæåíèå:", [&UC](TComplex& c) {cout << '\t' << (c * UC).GetComStr(); }, UC);
-		PrinBin("\n\tÄåëåíèå:  ", [&UC](TComplex& c) {cout << '\t' << (c / UC).GetComStr(); }, UC);
-		PrinBin("\n\tÐàâíî:    ", [&UC](TComplex& c) {cout << '\t' << (c == UC); }, UC);
+		PrinBin("\tÐ¡ÑƒÐ¼Ð¼Ð°:    ", [&UC](TComplex& c) {cout << '\t' << (c + UC).GetComStr(); }, UC);
+		PrinBin("\n\tÐ Ð°Ð·Ð½Ð¾ÑÑ‚ÑŒ: ", [&UC](TComplex& c) {cout << '\t' << (c - UC).GetComStr(); }, UC);
+		PrinBin("\n\tÐ£Ð¼Ð½Ð¾Ð¶ÐµÐ½Ð¸Ðµ:", [&UC](TComplex& c) {cout << '\t' << (c * UC).GetComStr(); }, UC);
+		PrinBin("\n\tÐ”ÐµÐ»ÐµÐ½Ð¸Ðµ:  ", [&UC](TComplex& c) {cout << '\t' << (c / UC).GetComStr(); }, UC);
+		PrinBin("\n\tÐ Ð°Ð²Ð½Ð¾:    ", [&UC](TComplex& c) {cout << '\t' << (c == UC); }, UC);
 
-		cout << "\n\n Íåêîòîðûå óíàðíûå îïåðàöèè ñ ìàññèâîì ÷èñåë:" << endl;
+		cout << "\n\n ÐÐµÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ ÑƒÐ½Ð°Ñ€Ð½Ñ‹Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ñ Ð¼Ð°ÑÑÐ¸Ð²Ð¾Ð¼ Ñ‡Ð¸ÑÐµÐ»:" << endl;
 
-		PrintUn("\tÎáðàòíîå:  ", [](TComplex& c) {cout << '\t' << (c.GetReverseC()).GetComStr(); });
-		PrintUn("\n\tÊâàäðàò: ", [](TComplex& c) {cout << '\t' << (c.GetSqrC()).GetComStr(); });
-		PrintUn("\n\tÌîäóëü:  ", [](TComplex& c) {cout << '\t' << c.GetModule(); });
-		PrintUn("\n\t1-é êîðåíü 3-é ñòåïåíè: ", [](TComplex& c) {cout << '\t' << (c.Get_i_Root(3,1)).GetComStr(); });
+		PrintUn("\tÐžÐ±Ñ€Ð°Ñ‚Ð½Ð¾Ðµ:  ", [](TComplex& c) {cout << '\t' << (c.GetReverseC()).GetComStr(); });
+		PrintUn("\n\tÐšÐ²Ð°Ð´Ñ€Ð°Ñ‚: ", [](TComplex& c) {cout << '\t' << (c.GetSqrC()).GetComStr(); });
+		PrintUn("\n\tÐœÐ¾Ð´ÑƒÐ»ÑŒ:  ", [](TComplex& c) {cout << '\t' << c.GetModule(); });
+		PrintUn("\n\t1-Ð¹ ÐºÐ¾Ñ€ÐµÐ½ÑŒ 3-Ð¹ ÑÑ‚ÐµÐ¿ÐµÐ½Ð¸: ", [](TComplex& c) {cout << '\t' << (c.Get_i_Root(3,1)).GetComStr(); });
 
 	}
 	catch (TComplex::ErrComplex e) {
 		cout << "\n ERROR: [" << e.msg << "]" << endl;
 	}
 	catch (...) {
-		cout << "\n ERROR: [Íåèçâåñòíàÿ îøèáêà]" << endl;
+		cout << "\n ERROR: [ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°]" << endl;
 	}
 	cout << endl << endl;
 	system("pause");
