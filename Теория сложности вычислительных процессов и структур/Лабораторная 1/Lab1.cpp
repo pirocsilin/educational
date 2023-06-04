@@ -25,7 +25,7 @@ int m[n][n];
 void SetMatrix() {
 	ifstream in(fname);
 	if (!in.is_open()) {
-		cout << "\n Файл " << fname << " не может быть открыт\n" << endl;
+		cout << "\n Р¤Р°Р№Р» " << fname << " РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕС‚РєСЂС‹С‚\n" << endl;
 		system("pause");
 		exit(-1);
 	}
@@ -43,8 +43,8 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	set<int> s[n];			// Компоненты связности
-	vector<Edge> e, o;		// Все грани; Остов
+	set<int> s[n];			// РљРѕРјРїРѕРЅРµРЅС‚С‹ СЃРІСЏР·РЅРѕСЃС‚Рё
+	vector<Edge> e, o;		// Р’СЃРµ РіСЂР°РЅРё; РћСЃС‚РѕРІ
 
 	SetMatrix();
 
@@ -66,21 +66,21 @@ int main() {
 
 			if (s[j].count(e[i].b)) Set2 = j;
 		}
-		if (Set1 != Set2) {		// Если концы ребра в разных компонентах связности
+		if (Set1 != Set2) {		// Р•СЃР»Рё РєРѕРЅС†С‹ СЂРµР±СЂР° РІ СЂР°Р·РЅС‹С… РєРѕРјРїРѕРЅРµРЅС‚Р°С… СЃРІСЏР·РЅРѕСЃС‚Рё
 			o.push_back(e[i]);
 			s[Set1].insert(s[Set2].begin(), s[Set2].end());
 			s[Set2].clear();
 		}
 	}
 	int sum = 0;
-	cout << "\n Порядок добавления ребер / вес:\n\n";
+	cout << "\n РџРѕСЂСЏРґРѕРє РґРѕР±Р°РІР»РµРЅРёСЏ СЂРµР±РµСЂ / РІРµСЃ:\n\n";
 	for (int i = 0; i < o.size(); i++) {
 		cout << setw(14) << i+1 <<") " << o[i].a 
 			 << " - " << o[i].b << "\t/  " << o[i].w << endl;
 		sum += o[i].w;
 	}
 
-	cout << "\n Вес остова: " << sum << endl;
+	cout << "\n Р’РµСЃ РѕСЃС‚РѕРІР°: " << sum << endl;
 
 	cout << endl;
 	system("pause");
