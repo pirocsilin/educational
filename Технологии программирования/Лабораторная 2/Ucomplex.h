@@ -39,7 +39,7 @@ public:
 		char ch;
 		istringstream is(str);
 		is >> Re >> Im >> ch;
-		if (ch != 'i') throw ErrComplex("Ошибка инициализации");
+		if (ch != 'i') throw ErrComplex("РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё");
 
 		*this = TComplex(Re, Im);
 	}
@@ -103,7 +103,7 @@ public:
 	}
 	TComplex Get_i_Root(int n, int i) {
 
-		if (n < 2 || --i < 0 || i > n - 1) throw ErrComplex("Не верно указаны параметры");
+		if (n < 2 || --i < 0 || i > n - 1) throw ErrComplex("РќРµ РІРµСЂРЅРѕ СѓРєР°Р·Р°РЅС‹ РїР°СЂР°РјРµС‚СЂС‹");
 
 		double pow_fi = pow((*this).GetModule(), 1. / n);
 		double a = pow_fi * cos(((*this).GetAngleRad() + 2 * PI * i) / n);
