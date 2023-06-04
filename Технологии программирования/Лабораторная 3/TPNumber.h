@@ -33,7 +33,7 @@ public:
 	};
 	TPNumber(double a = 1, int b = 10, int c = 0) {
 
-		if (b < 2 || b>16 || c < 0 || c>20) throw TPNumErr("Ошибка инициализации");
+		if (b < 2 || b>16 || c < 0 || c>20) throw TPNumErr("РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё");
 
 		n = a;	p = b;	this->c = c;
 	}
@@ -57,7 +57,7 @@ public:
 
 		if (rez[0] == '0') rez.erase(0, 1);
 
-		if (b && c) {				// если есть дробная часть и точность > 0
+		if (b && c) {				// РµСЃР»Рё РµСЃС‚СЊ РґСЂРѕР±РЅР°СЏ С‡Р°СЃС‚СЊ Рё С‚РѕС‡РЅРѕСЃС‚СЊ > 0
 			int count = 0;
 			ostringstream os;
 			b *= p;
@@ -88,7 +88,7 @@ public:
 	TPNumber operator +(const TPNumber& op2) const {
 
 		if (p != op2.p || c != op2.c)
-			throw TPNumErr("Точность и основание операндов должны совпадать!");
+			throw TPNumErr("РўРѕС‡РЅРѕСЃС‚СЊ Рё РѕСЃРЅРѕРІР°РЅРёРµ РѕРїРµСЂР°РЅРґРѕРІ РґРѕР»Р¶РЅС‹ СЃРѕРІРїР°РґР°С‚СЊ!");
 
 		return TPNumber(n + op2.n, p, c);
 	}
@@ -96,7 +96,7 @@ public:
 	TPNumber operator *(const TPNumber& op2) const {
 
 		if (p != op2.p || c != op2.c)
-			throw TPNumErr("Точность и основание операндов должны совпадать!");
+			throw TPNumErr("РўРѕС‡РЅРѕСЃС‚СЊ Рё РѕСЃРЅРѕРІР°РЅРёРµ РѕРїРµСЂР°РЅРґРѕРІ РґРѕР»Р¶РЅС‹ СЃРѕРІРїР°РґР°С‚СЊ!");
 
 		return TPNumber(n * op2.n, p, c);
 	}
@@ -104,24 +104,24 @@ public:
 	TPNumber operator -(const TPNumber& op2) const {
 
 		if (p != op2.p || c != op2.c)
-			throw TPNumErr("Точность и основание операндов должны совпадать!");
+			throw TPNumErr("РўРѕС‡РЅРѕСЃС‚СЊ Рё РѕСЃРЅРѕРІР°РЅРёРµ РѕРїРµСЂР°РЅРґРѕРІ РґРѕР»Р¶РЅС‹ СЃРѕРІРїР°РґР°С‚СЊ!");
 
 		return TPNumber(n - op2.n, p, c);
 	}
 
 	TPNumber operator /(const TPNumber& op2) const {
 
-		if (op2.n == 0) throw TPNumErr("Делитель равен нулю");
+		if (op2.n == 0) throw TPNumErr("Р”РµР»РёС‚РµР»СЊ СЂР°РІРµРЅ РЅСѓР»СЋ");
 
 		if (p != op2.p || c != op2.c)
-			throw TPNumErr("Точность и основание операндов должны совпадать");
+			throw TPNumErr("РўРѕС‡РЅРѕСЃС‚СЊ Рё РѕСЃРЅРѕРІР°РЅРёРµ РѕРїРµСЂР°РЅРґРѕРІ РґРѕР»Р¶РЅС‹ СЃРѕРІРїР°РґР°С‚СЊ");
 
 		return TPNumber(n / op2.n, p, c);
 	}
 
 	TPNumber GetReverse() {
 
-		if (n == 0) throw TPNumErr("Делитель равен нулю");
+		if (n == 0) throw TPNumErr("Р”РµР»РёС‚РµР»СЊ СЂР°РІРµРЅ РЅСѓР»СЋ");
 
 		return TPNumber(1 / n, p, c);
 	}
@@ -140,7 +140,7 @@ public:
 
 	void SetBase(int p) {
 
-		if (p < 2 || p > 16) throw TPNumErr("Основание должно быть от 2 до 16");
+		if (p < 2 || p > 16) throw TPNumErr("РћСЃРЅРѕРІР°РЅРёРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РѕС‚ 2 РґРѕ 16");
 
 		this->p = p;
 	}
@@ -149,14 +149,14 @@ public:
 
 		int base = atoi(newp.c_str());
 
-		if (base < 2 || base > 16) throw TPNumErr("Основание должно быть от 2 до 16");
+		if (base < 2 || base > 16) throw TPNumErr("РћСЃРЅРѕРІР°РЅРёРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РѕС‚ 2 РґРѕ 16");
 
 		p = base;
 	}
 
 	void SetPrecision(int c) {
 
-		if (c < 0 || c > 20) throw TPNumErr("Точность должна быть от 0 до 20");
+		if (c < 0 || c > 20) throw TPNumErr("РўРѕС‡РЅРѕСЃС‚СЊ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РѕС‚ 0 РґРѕ 20");
 
 		this->c = c;
 	}
@@ -165,7 +165,7 @@ public:
 
 		int prec = atoi(newc.c_str());
 
-		if (prec < 0 || prec > 20) throw TPNumErr("Точность должна быть от 0 до 20");
+		if (prec < 0 || prec > 20) throw TPNumErr("РўРѕС‡РЅРѕСЃС‚СЊ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РѕС‚ 0 РґРѕ 20");
 
 		p = prec;
 	}
