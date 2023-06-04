@@ -35,7 +35,7 @@ public:
 
 	TFract(int a, int b) {
 
-		if (b == 0) throw ErrFract("Ошибка инициализации");
+		if (b == 0) throw ErrFract("РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё");
 
 		if ((a <= 0 && b < 0) || (a > 0 && b < 0))
 		{
@@ -110,7 +110,7 @@ public:
 	TFract operator / (const TFract& op2) const {
 
 		if (denom == 0 || op2.num == 0)
-			throw ErrFract("Делитель равен нулю");
+			throw ErrFract("Ж’РµР»РёС‚РµР»СЊ СЂР°РІРµРЅ РЅСѓР»СЋ");
 
 		int sign = op2.num < 0 ? -1 : 1;
 
