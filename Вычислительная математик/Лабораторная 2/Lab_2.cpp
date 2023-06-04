@@ -27,12 +27,12 @@ int main()
 {
     setlocale(LC_ALL, "Rus");
     system("mode con cols=60 lines=78");
-    cout << "\n\t\t>> À¿¡Œ–¿“Œ–Õ¿ﬂ –¿¡Œ“¿ π2 <<\n\n";
+    cout << "\n\t\t>> –õ–ê–ë–û–†–ê–¢–û–†–ù–ê–Ø –†–ê–ë–û–¢–ê ‚Ññ2 <<\n\n";
 
     int Iteration = 1;
     while (true)
     {
-        cout << "\t»ÚÂ‡ˆËˇ " << Iteration << ":\n";
+        cout << "\t–ò—Ç–µ—Ä–∞—Ü–∏—è " << Iteration << ":\n";
         for (int i = 0; i < n; i++)
         {
             X[i] = B[i] - SetPrecision(MultiplyCX(i));
@@ -42,22 +42,22 @@ int main()
 
         if (FindPrecision() < target)
         {
-            printf("\t\t“Ó˜ÌÓÒÚ¸: %.5f\n", SetPrecision(FindPrecision()));
+            printf("\t\t–¢–æ—á–Ω–æ—Å—Ç—å: %.5f\n", SetPrecision(FindPrecision()));
 
             cout << " ------------------------------------------\n" << endl;
-            cout << " œË·ÎËÊÂÌÌÓÂ Â¯ÂÌËÂ Ò ÚÓ˜ÌÓÒÚ¸˛ ‰Ó 0.0001:\n" << endl;
+            cout << " –ü—Ä–∏–±–ª–∏–∂–µ–Ω–Ω–æ–µ —Ä–µ—à–µ–Ω–∏–µ —Å —Ç–æ—á–Ω–æ—Å—Ç—å—é –¥–æ 0.0001:\n" << endl;
             Rezult(0);
 
             break;
         }
-        printf("\t\t“Ó˜ÌÓÒÚ¸: %.5f\n", SetPrecision(FindPrecision()));
+        printf("\t\t–¢–æ—á–Ω–æ—Å—Ç—å: %.5f\n", SetPrecision(FindPrecision()));
 
         Iteration++;
         RecordPreviosX(n - 1);
 
         cout << endl;
     }
-    cout << "\n\t\t«¿¬≈–ÿ»“‹ - À˛·‡ˇ  Î‡‚Ë¯‡ ";
+    cout << "\n\t\t–ó–ê–í–ï–†–®–ò–¢–¨ - –õ—é–±–∞—è –ö–ª–∞–≤–∏—à–∞ ";
     cin.get();
 
     return 0;
