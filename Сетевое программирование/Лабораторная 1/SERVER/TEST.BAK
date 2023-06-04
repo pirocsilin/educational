@@ -1,0 +1,111 @@
+
+//------------------------------------------------------------------------------
+//				    SERVER
+//------------------------------------------------------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include "ipx.h"
+
+IPXADDRESS myaddress;
+
+IPXECB recb;
+IPXECB secb;
+
+IPXHEADER rheader;
+IPXHEADER sheader;
+
+char in_buffer[100];
+char out_buffer[] = "Tryushnikov Vadim Georgievich";
+unsigned short NumSocket = 0x4444;
+
+int i;
+
+void OpenSocket(){
+    myaddress.socket=NumSocket;
+    switch(ipxopensocket(0x00,&myaddress.socket))
+    {
+        case 0x00: // Success
+	    printf(" Socket %X is open\n",reverseword(myaddress.socket));
+	    break;
+        case 0xFE:
+            printf(" Socket Table Full\n");
+            exit(1);
+        case 0xFF:
+            printf(" Socket Already Open\n");
+            exit(1);
+    }
+}
+void InitResivECB(){
+    recb.socket=myaddress.socket;
+    recb.esraddress=NULL;
+    recb.fragcount=2;
+    recb.fragaddr1=&rheader;
+    recb.fragsize1=sizeof(IPXHEADER);
+    recb.fragaddr2=in_buffer;
+    recb.fragsize2=sizeof(in_buffer);
+}
+ void InitSendECB(){
+    secb.socket=myaddress.socket;
+    secb.esraddress=NULL;
+    secb.fragcount=2;
+    secb.fragaddr1=&sheader;
+    secb.fragsize1=sizeof(IPXHEADER);
+    secb.fragaddr2=out_buffer;
+    secb.fragsize2=sizeof(out_buffer);
+}
+void SetSendHeader(){
+    for(i=0;i<4;i++) sheader.dest.netadd[i]=0x00;
+    memcpy(sheader.dest.nodeadd, recb.immedaddr, 6);
+    sheader.dest.socket=myaddress.socket;
+    sheader.type=4;
+}
+
+void Close(){
+    printf("\n Program exit\n");
+    ipxclosesocket(myaddress.socket);
+    exit(1);
+}
+//------------------------------------------------------------------------------
+void main ( void )
+{
+    system("cls");
+
+    if(!ipxinit())
+    {
+        printf("IPX not installed\n");
+        exit(-1);
+    }
+
+    printf("\n%45s\n", ">> SERVER <<");
+    OpenSocket();
+    InitResivECB();
+    ipxlistenforpacket(&recb);
+
+    printf("\n Waiting for Request...");
+    printf("\n or any key - EXIT\n");
+
+    while(recb.inuse){
+	ipxrelenquishcontrol();
+	if(kbhit()){
+	    getch();
+	    recb.cc = 0xFC;
+	    //ipxgetaddress(&myaddress);
+	    //printf("\n Send reply to Client: ");
+	    //for(i=0;i<6;i++) printf("%02X ", myaddress.nodeadd[i]);
+	    Close();
+        }
+    }
+
+    printf("\n Accept a request: %s", in_buffer);
+    printf("\n\n Press any key to send a reply");
+    getch();
+
+    SetSendHeader();
+    InitSendECB();
+
+    ipxsendpacket(&secb);
+    printf("\n Send reply to Client: ");
+    for(i=0;i<6;i++) printf("%02X ", secb.immedaddr[i]);
+    Close();
+}
