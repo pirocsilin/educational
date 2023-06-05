@@ -3,7 +3,7 @@
 2.	Протестировать пользовательский класс, используя средства модульного тестирования Visual Studio. Тестовые наборы необходимо построить на основе критериев тестирования C0,C1.
 <br><br>РЕЗУЛЬТАТ ВЫПОЛНЕНИЯ:<br><br>
 ![666](https://github.com/pirocsilin/educational/assets/97364957/9e380b0d-d638-426c-b7fa-0846bd13427f)
-<br>
+
 ![666](https://github.com/pirocsilin/educational/assets/97364957/850b9df5-e887-42cb-9c5b-90c4e1c3df7c)
 
 
